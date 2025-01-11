@@ -1,0 +1,35 @@
+# Ignorar o ambiente virtual
+.venv/
+
+# Ignorar todos os conteúdos das pastas de dados
+data/downloads/*
+data/transcriptions/*
+data/videos/*
+
+# Exceto pelos arquivos .gitkeep
+!data/downloads/.gitkeep
+!data/transcriptions/.gitkeep
+!data/videos/.gitkeep
+
+
+# Ignorar arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar configurações do IDE
+.idea/
+.vscode/
+
+# Ignorar arquivos temporários ou backups
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Ignorar arquivos gerados por builds
+dist/
+build/
