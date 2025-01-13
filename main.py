@@ -1,9 +1,11 @@
 from instagram_download.downloader import download_instagram_video
 from whisper_test.transcriber import transcribe_video
+from goauth_service.gservice import authenticate_google_sheets
+from table_manager.table import TableManager
 import os
 
 def download_and_transcribe(instagram_url, download_folder="data/downloads", transcription_folder="data/transcriptions"):
-    """
+    """ 
     Baixa um vídeo do Instagram e transcreve o áudio/vídeo.
 
     :param instagram_url: URL do vídeo no Instagram.
@@ -42,13 +44,28 @@ def download_and_transcribe(instagram_url, download_folder="data/downloads", tra
     print("Processo concluído com sucesso!")
 
 
-# Exemplo de uso
 if __name__ == "__main__":
-    # URL do vídeo do Instagram
-    instagram_url = "https://www.instagram.com/"
-
-    # Executar a função principal
     try:
-        download_and_transcribe(instagram_url)
+        client = authenticate_google_sheets()
+        table_manager = TableManager(client, spreadsheet_name="instagram", sheet_name="links")
+        links = table_manager.get_links()
+
+        processed_links = set()  # Para evitar duplicatas
+
+        for url in links:
+            if url in processed_links:
+                print(f"Link já processado: {url}")
+                continue
+
+            try:
+                print(f"Processando o link: {url}")
+                download_instagram_video(url)
+                processed_links.add(url)
+            except Exception as e:
+                print(f"Erro ao processar o link {url}: {e}")
+
     except Exception as e:
-        print(f"Erro no processo: {e}")
+        print(f"Erro durante a execução: {e}")
+
+        #um pequeno erro, a transcricao foi feita apenas duas vezes
+        #OpenAI ApI -> renomear transcription e resumir junto 

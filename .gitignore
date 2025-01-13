@@ -1,5 +1,6 @@
-# Ignorar o ambiente virtual
+.DS_Store
 .venv/
+credenciais.json
 
 # Ignorar todos os conteúdos das pastas de dados
 data/downloads/*
@@ -33,3 +34,4 @@ __pycache__/
 # Ignorar arquivos gerados por builds
 dist/
 build/
+
