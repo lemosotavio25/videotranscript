@@ -1,6 +1,7 @@
 import openai
 from open_ai_assistant.api_key import API_KEY
 
+
 class OpenAIChatAssistant:
     """
     Classe para interagir com a API OpenAI ChatCompletion.
@@ -24,7 +25,13 @@ class OpenAIChatAssistant:
         :param system_message: Uma mensagem de sistema opcional para definir o contexto.
         :return: A resposta gerada pelo modelo.
         """
-        messages = []
+        messages = [
+            {"role": "system",
+             "content": "Preciso que você faça um resumo de um post no Instagram. Você receberá alguns títulos e "
+                        "hashtags e também a transcrição completa do vídeo."},
+            {"role": "user", "content": "Aqui está a transcrição completa do vídeo: <transcrição>"}
+        ]
+
         if system_message:
             messages.append({"role": "system", "content": system_message})
         messages.append({"role": "user", "content": prompt})
