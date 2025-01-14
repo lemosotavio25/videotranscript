@@ -1,6 +1,7 @@
 .DS_Store
 .venv/
 credenciais.json
+open_ai_assistant/api_key.py
 
 # Ignorar todos os conteúdos das pastas de dados
 data/downloads/*
